@@ -8,6 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
@@ -18,7 +20,7 @@ import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
 import com.google.zxing.Result;
 
-public class MainActivity extends AppCompatActivity {
+public class Scanner extends AppCompatActivity {
     private CodeScanner mCodeScanner;
 
     @Override
@@ -32,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
             requestPermissionLauncher.launch(Manifest.permission.CAMERA);
         }
 
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_scan);
         CodeScannerView scannerView = findViewById(R.id.scanner_view);
         mCodeScanner = new CodeScanner(this, scannerView);
         mCodeScanner.setDecodeCallback(new DecodeCallback() {
@@ -41,7 +43,11 @@ public class MainActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(MainActivity.this, result.getText(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Scanner.this, result.getText(), Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getApplicationContext(), MainApp.class);
+                        intent.putExtra("result",result.getText());
+                        setResult(Activity.RESULT_OK,intent);
+                        finish();
                     }
                 });
             }
@@ -72,11 +78,8 @@ public class MainActivity extends AppCompatActivity {
                     // Permission is granted. Continue the action or workflow in your
                     // app.
                 } else {
-                    // Explain to the user that the feature is unavailable because the
-                    // feature requires a permission that the user has denied. At the
-                    // same time, respect the user's decision. Don't link to system
-                    // settings in an effort to convince the user to change their
-                    // decision.
+                    // Explain to the user that the feature is unavailable
                 }
-            });
+    });
+
 }
