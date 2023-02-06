@@ -20,7 +20,7 @@ import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
 import com.google.zxing.Result;
 
-public class Scanner extends AppCompatActivity {
+public class ScanActivity extends AppCompatActivity {
     private CodeScanner mCodeScanner;
 
     @Override
@@ -43,8 +43,8 @@ public class Scanner extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(Scanner.this, result.getText(), Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getApplicationContext(), MainApp.class);
+                        Toast.makeText(ScanActivity.this, result.getText(), Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         intent.putExtra("result",result.getText());
                         setResult(Activity.RESULT_OK,intent);
                         finish();

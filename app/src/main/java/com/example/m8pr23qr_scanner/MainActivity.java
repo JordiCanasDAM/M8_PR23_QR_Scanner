@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class MainApp extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
     int CODE = 1;
     TextView textView;
     Button button;
@@ -20,7 +20,7 @@ public class MainApp extends AppCompatActivity {
         button = findViewById(R.id.button2);
 
         button.setOnClickListener((clicked) -> {
-            Intent intent = new Intent(this, Scanner.class);
+            Intent intent = new Intent(this, ScanActivity.class);
             startActivityForResult(intent, CODE);
         });
     }
